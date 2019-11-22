@@ -30,7 +30,8 @@ namespace Conduit.Api.Configuration
                 throw new ArgumentException(nameof(connectionString));
             }
 
-            services.AddDbContext<ApplicationDbContext>(opts => opts.UseNpgsql(connectionString));
+            // services.AddDbContext<ApplicationDbContext>(opts => opts.UseNpgsql(connectionString));
+            services.AddDbContext<ApplicationDbContext>(opts => opts.UseSqlServer(connectionString));
         }
 
         public static void AddJwtIdentity(this IServiceCollection services, IConfigurationSection jwtConfiguration)
