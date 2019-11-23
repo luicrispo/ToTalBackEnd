@@ -43,7 +43,8 @@ namespace Conduit.Api
             services.AddTransient<ITagsService, TagsService>();
             services.AddTransient<IArticleCommentsService, ArticleCommentsService>();
             services.AddTransient<IJwtFactory, JwtFactory>();
-
+            services.AddCors();
+            
             services.AddMvc(options =>
             {
                 options.ModelBinderProviders.Insert(0, new OptionModelBinderProvider());
@@ -62,6 +63,7 @@ namespace Conduit.Api
                 dbContext.Database.EnsureCreated();
             }
 
+            app.UseCors(options => options.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
             app.UseSwagger("My Web API.");
             app.UseStaticFiles();
             app.UseAuthentication();
